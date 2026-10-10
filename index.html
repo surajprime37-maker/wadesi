@@ -19,99 +19,67 @@
         .input-area.active { display: block; }
         input { width: 100%; padding: 16px; border: 2px solid #2a3942; border-radius: 14px; font-size: 18px; box-sizing: border-box; transition: 0.3s; text-align: center; font-weight: bold; background-color: #2a3942; color: white; margin-bottom: 20px; }
         input:focus { border-color: #00a884; outline: none; background-color: #222e35; box-shadow: 0 0 15px rgba(0,168,132,0.2); }
-        input::placeholder { color: #8696a0; font-weight: normal; }
         .radio-group { display: flex; justify-content: center; gap: 25px; margin-bottom: 20px; background: #111b21; padding: 10px; border-radius: 10px; }
         .radio-group label { font-size: 15px; font-weight: 600; color: #e9edef; cursor: pointer; display: flex; align-items: center; gap: 8px; }
         button { width: 100%; padding: 16px; background-color: #00a884; color: #111b21; border: none; border-radius: 14px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.2s; box-shadow: 0 5px 15px rgba(0,168,132,0.3); }
-        button:hover { background-color: #00bfa5; transform: translateY(-1px); }
-        button:active { transform: translateY(1px); }
-        .footer { margin-top: 30px; font-size: 12px; color: #667781; font-weight: 500; letter-spacing: 0.5px; }
+        .footer { margin-top: 30px; font-size: 12px; color: #667781; font-weight: 500; }
     </style>
 </head>
 <body>
-
 <div class="card">
-    <div class="whatsapp-icon-box">
-        <span class="chat-bubble">💬</span>
-        <span class="no-save-badge">No Save</span>
-    </div>
-    
+    <div class="whatsapp-icon-box"><span class="chat-bubble">💬</span><span class="no-save-badge">No Save</span></div>
     <h1>WaDesi</h1>
     <p>नंबर सेव करने का झंझट खत्म! यहाँ से सीधे व्हाट्सएप, बिजनेस मैसेज या टेलीग्राम भेजें।</p>
-    
     <div class="tab-container">
         <div id="tab-wa" class="tab active" onclick="switchTab('wa')">WhatsApp</div>
         <div id="tab-tg" class="tab" onclick="switchTab('tg')">Telegram</div>
         <div id="tab-gp" class="tab" onclick="switchTab('gp')">Group Link</div>
     </div>
-    
-    <!-- WhatsApp Section -->
     <div id="wa-section" class="input-area active">
         <input type="number" id="phone" placeholder="10 अंकों का मोबाइल नंबर लिखें" autocomplete="off">
         <div class="radio-group">
-            <label><input type="radio" name="wa-type" id="wa-reg" checked style="accent-color: #00a884;"> Regular</label>
-            <label><input type="radio" name="wa-type" id="wa-biz" style="accent-color: #00a884;"> Business</label>
+            <label><input type="radio" name="wa-type" id="wa-reg" checked> Regular</label>
+            <label><input type="radio" name="wa-type" id="wa-biz"> Business</label>
         </div>
         <button onclick="goToWhatsApp()">सीधे चैट शुरू करें ➔</button>
     </div>
-    
-    <!-- Telegram Section -->
     <div id="tg-section" class="input-area">
-        <input type="text" id="tg-username" placeholder="टेलीग्राम Username या नंबर लिखें" autocomplete="off">
-        <button onclick="goToTelegram()" style="background-color: #229ED9; color: white; box-shadow: 0 5px 15px rgba(34,158,217,0.3);">टेलीग्राम पर भेजें ➔</button>
+        <input type="text" id="tg-username" placeholder="टेलीग्राम Username लिखें" autocomplete="off">
+        <button onclick="goToTelegram()" style="background-color: #229ED9;">टेलीग्राम पर भेजें ➔</button>
     </div>
-    
-    <!-- Group Section -->
     <div id="gp-section" class="input-area">
         <input type="text" id="group-url" placeholder="व्हाट्सएप ग्रुप का पूरा लिंक पेस्ट करें" autocomplete="off">
-        <button onclick="joinGroup()" style="background-color: #25D366; color: white; box-shadow: 0 5px 15px rgba(37,211,102,0.3);">ग्रुप में शामिल हों ➔</button>
+        <button onclick="joinGroup()" style="background-color: #25D366;">ग्रुप में शामिल हों ➔</button>
     </div>
-    
-    <div class="footer">🔒 100% सुरक्षित • आपका कोई डेटा सेव नहीं होता</div>
+    <div class="footer">🔒 100% सुरक्षित • कोई डेटा सेव नहीं होता</div>
 </div>
-
 <script>
 function switchTab(type) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.input-area').forEach(s => s.classList.remove('active'));
-    
-    if(type === 'wa') {
-        document.getElementById('tab-wa').classList.add('active');
-        document.getElementById('wa-section').classList.add('active');
-    } else if(type === 'tg') {
-        document.getElementById('tab-tg').classList.add('active');
-        document.getElementById('tg-section').classList.add('active');
-    } else if(type === 'gp') {
-        document.getElementById('tab-gp').classList.add('active');
-        document.getElementById('gp-section').classList.add('active');
-    }
+    if(type === 'wa') { document.getElementById('tab-wa').classList.add('active'); document.getElementById('wa-section').classList.add('active'); }
+    else if(type === 'tg') { document.getElementById('tab-tg').classList.add('active'); document.getElementById('tg-section').classList.add('active'); }
+    else if(type === 'gp') { document.getElementById('tab-gp').classList.add('active'); document.getElementById('gp-section').classList.add('active'); }
 }
-
 function goToWhatsApp() {
     var num = document.getElementById("phone").value.trim();
     var isBiz = document.getElementById("wa-biz").checked;
     if (num === "" || num.length < 10) { alert("कृपया एक सही 10 अंकों का मोबाइल नंबर डालें!"); return; }
     if (num.length === 10) { num = "91" + num; }
-    
     var finalUrl = isBiz ? "https://wa.me" + num : "https://whatsapp.com" + num;
     window.open(finalUrl, "_self");
 }
-
 function goToTelegram() {
-    var user = document.getElementById("tg-username").value.trim();
-    if (user === "") { alert("कृपया Username या नंबर डालें!"); return; }
-    user = user.replace('@', '');
+    var user = document.getElementById("tg-username").value.trim().replace('@', '');
+    if (user === "") { alert("कृपया Username डालें!"); return; }
     window.open("https://t.me" + user, "_self");
 }
-
-// ग्रुप जॉइन के लिए भी _self ताकि क्रोम न रोके
 function joinGroup() {
     var url = document.getElementById("group-url").value.trim();
-    if (url === "") { alert("कृपया ग्रुप का लिंक पेस्ट करें!"); return; }
-    if (!url.includes("://whatsapp.com")) { alert("कृपया एक सही व्हाट्सएप ग्रुप लिंक डालें!"); return; }
+    if (url === "" || !url.includes("://whatsapp.com")) { alert("कृपया सही ग्रुप लिंक डालें!"); return; }
     window.open(url, "_self");
 }
 </script>
-
 </body>
 </html>
+
